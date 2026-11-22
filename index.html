@@ -155,6 +155,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
   <a class="sub" href="#unidades">· Unidades</a>
   <a class="sub" href="#pasos">· Publicar y comprar</a>
   <a class="sub" href="#parametros">· Parámetros</a>
+  <a class="sub" href="#validaciones">· Validaciones</a>
   <a class="sub" href="#errores">· Errores</a>
   <a href="#reparto">14 · Reparto</a>
 </nav>
@@ -673,6 +674,19 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 <li><strong>Regla dura:</strong> la wallet del token es la única que las herramientas aceptan. Esto impide que una instrucción inyectada prepare una transacción a nombre de otro.</li>
 <li><code>prosumidorId</code> no existe: la wallet en minúsculas es el identificador único.</li>
 </ul>
+
+<h3 id="validaciones">Validaciones antes de preparar</h3>
+<p>El contrato ya las hace y revierte, pero la herramienta debe adelantarse para que el usuario no gaste gas en una transacción que va a fallar. <strong>El orden importa.</strong></p>
+<div class="tw"><table>
+<thead><tr><th>Antes de</th><th>Verificar, en este orden</th><th>Ojo</th></tr></thead>
+<tbody>
+<tr><td><code>preparar_publicacion</code></td><td>1) que el id tenga NFT · 2) <code>ownerOf == wallet</code> · 3) <code>status == 2</code> · 4) precio &gt; 0</td><td><strong>Primero la existencia.</strong> Con <code>Pending</code> o <code>Rejected</code> no hay NFT, así que <code>ownerOf</code> revierte antes que cualquier chequeo de estado: nunca se llega a <code>NotVerified</code></td></tr>
+<tr><td><code>preparar_compra</code></td><td><code>isListed</code> · <code>seller != wallet</code> · saldo de POL suficiente</td><td>El <code>value</code> debe ser exacto o el contrato revierte con <code>WrongPayment</code></td></tr>
+</tbody></table></div>
+<div class="warn">
+  <div class="t">Trampa de implementación</div>
+  <p>Quien escriba <code>preparar_publicacion</code> tiende a validar el estado primero, porque es lo que dice el caso de negocio. El contrato no funciona así: el NFT solo se acuña cuando el oráculo aprueba, de modo que un certificado rechazado no es un certificado en mal estado, <strong>es un certificado que no existe</strong>.</p>
+</div>
 
 <h3 id="errores">Errores</h3>
 <p>Se devuelven como <strong>error de ejecución de la herramienta</strong>, no de protocolo, para que el modelo se corrija solo.</p>
