@@ -511,7 +511,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 
 <h4>Clase A · determinista, con script y sin modelo</h4>
 <ol>
-<li>Comprar un certificado en estado <code>Rejected</code>.</li>
+<li>Publicar o comprar un certificado <code>Rejected</code>: su NFT nunca se acuñó, así que revierte con <code>ERC721NonexistentToken</code>, no con <code>NotVerified</code> — no se puede negociar lo que no existe.</li>
 <li>Preparar una compra para una wallet distinta a la del token.</li>
 <li>Comprar la propia oferta.</li>
 <li>Firmar contra una recomendación vencida o una oferta ya comprada.</li>
@@ -531,6 +531,19 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
   <div class="t">La conclusión que vale la nota</div>
   <p>Los intentos de clase B pueden fallar alguna vez porque el modelo es probabilístico, y no importa: aunque el modelo decida obedecer, no existe herramienta que pueda firmar. <strong>Las defensas que viven en el prompt son probabilísticas; las que viven en la arquitectura son deterministas.</strong> Por eso el control está en el catálogo de herramientas y no en las instrucciones del modelo.</p>
 </div>
+
+<h3>Evidencia · Nivel 0 ya ejecutado en Amoy</h3>
+<p>La capa determinista del contrato ya se puede demostrar sin construir nada: cada acción prohibida se simuló con <code>eth_call</code> (no firma, no gasta gas) contra los contratos desplegados. El revert es nombrado y repetible: mismo input, mismo resultado.</p>
+<div class="tw"><table>
+<thead><tr><th>Intento prohibido (simulado)</th><th>Revert del contrato</th><th>Código de la herramienta</th></tr></thead>
+<tbody>
+<tr><td><code>buy(#1)</code> — existe pero no está publicado</td><td><code>NotListed(1)</code></td><td><code>OFERTA_NO_DISPONIBLE</code></td></tr>
+<tr><td><code>list(#6)</code> — certificado Rejected/Pending</td><td><code>ERC721NonexistentToken(6)</code></td><td>no se puede ni listar</td></tr>
+<tr><td><code>list(#1)</code> — Verified ajeno, desde otra wallet</td><td><code>NotOwner(1, 0x…dEaD)</code></td><td><code>NO_ERES_EL_TITULAR</code></td></tr>
+<tr><td><code>buy(#10, value=precio+1)</code> — el pago no coincide</td><td><code>WrongPayment(…)</code></td><td><code>PRECIO_DESACTUALIZADO</code></td></tr>
+<tr><td><code>buy(#10, value=exacto)</code> desde el propio vendedor</td><td><code>SellerIsBuyer()</code></td><td><code>NO_PUEDES_COMPRAR_TU_OFERTA</code></td></tr>
+</tbody></table></div>
+<p class="cap">Cinco intentos, cinco reverts deterministas, cero gas. <strong>Control positivo:</strong> una compra legítima firmada con el precio exacto sí se ejecuta — <code>buy(#34)</code> confirmada en Amoy (tx <code>0x9b11696b…3426e</code>) — para mostrar que la arquitectura bloquea lo indebido, no todo.</p>
 
 <p><strong>Opcionales:</strong> E2, valor de la recomendación, con escenarios donde la oferta más barata en POL no es la mejor por kWh · E3, degradación elegante, apagando <code>mcp-energia</code>.</p>
 </section>
@@ -652,7 +665,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 <pre><code>{ "error": "CERTIFICADO_NO_VERIFICADO",
   "mensaje": "El certificado 35 está en estado Rejected y no puede publicarse.",
   "sugerencia": "Usa consultar_saldo para ver los certificados disponibles." }</code></pre>
-<p>Mapeo desde el contrato: <code>NotVerified</code> → <code>CERTIFICADO_NO_VERIFICADO</code> · <code>NotListed</code> → <code>OFERTA_NO_DISPONIBLE</code> · <code>SellerIsBuyer</code> → <code>NO_PUEDES_COMPRAR_TU_OFERTA</code> · <code>WrongPayment</code> → <code>PRECIO_DESACTUALIZADO</code> · <code>NotOwner</code> y <code>NotSeller</code> → <code>NO_ERES_EL_TITULAR</code> · <code>RetiredCertificateIsLocked</code> → <code>CERTIFICADO_YA_RETIRADO</code>.</p>
+<p>Mapeo desde el contrato: <code>NotVerified</code> → <code>CERTIFICADO_NO_VERIFICADO</code> · <code>NotListed</code> → <code>OFERTA_NO_DISPONIBLE</code> · <code>SellerIsBuyer</code> → <code>NO_PUEDES_COMPRAR_TU_OFERTA</code> · <code>WrongPayment</code> → <code>PRECIO_DESACTUALIZADO</code> · <code>NotOwner</code>, <code>NotSeller</code> y <code>NotHolder</code> → <code>NO_ERES_EL_TITULAR</code> · <code>RetiredCertificateIsLocked</code> → <code>CERTIFICADO_YA_RETIRADO</code> · un id sin NFT, Pending o Rejected → <code>ERC721NonexistentToken</code>, que el servidor traduce a <code>CERTIFICADO_NO_NEGOCIABLE</code>.</p>
 
 <h3>Consultas y almacén</h3>
 <p>El certificado es ERC-721 <strong>sin Enumerable</strong>: no hay <code>tokenOfOwnerByIndex</code>. En el PoC se recorre de 1 a <code>nextCertificateId()-1</code> con <code>ownerOf</code>; en el objetivo se indexa el evento <code>Transfer</code>.</p>
