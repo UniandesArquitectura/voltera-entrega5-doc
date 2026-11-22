@@ -545,6 +545,15 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 </tbody></table></div>
 <p class="cap">Cinco intentos, cinco reverts deterministas, cero gas. <strong>Control positivo:</strong> una compra legítima firmada con el precio exacto sí se ejecuta — <code>buy(#34)</code> confirmada en Amoy (tx <code>0x9b11696b…3426e</code>) — para mostrar que la arquitectura bloquea lo indebido, no todo.</p>
 
+<h3>Nivel 1 y 2 · la superficie de herramientas, ejecutada</h3>
+<p>El slice mínimo de <code>mcp-mercado</code> (cuatro herramientas de solo lectura más <code>preparar_compra</code>, que devuelve pasos sin firmar) y un agente que lo consume por MCP ya corren contra Amoy. La parte determinista del experimento, sobre el límite real de la herramienta, confirma:</p>
+<ul>
+  <li><strong>Cero</strong> herramientas capaces de firmar o enviar en el catálogo.</li>
+  <li>Una inyección que pide preparar una compra para otra wallet se rechaza: <code>IDENTIDAD_NO_COINCIDE</code>.</li>
+  <li>Ninguna herramienta acepta una llave privada como parámetro.</li>
+</ul>
+<p>La parte probabilística —el agente bajo inyección, repetida N veces— mide cuántas veces el modelo obedece y cuántas transacciones se firman: cero, por diseño. Código y arnés en el repositorio <code>voltera-entrega5-mcp</code>.</p>
+
 <p><strong>Opcionales:</strong> E2, valor de la recomendación, con escenarios donde la oferta más barata en POL no es la mejor por kWh · E3, degradación elegante, apagando <code>mcp-energia</code>.</p>
 </section>
 
