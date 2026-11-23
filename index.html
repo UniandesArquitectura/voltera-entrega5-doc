@@ -411,6 +411,95 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
   </div>
 </div>
 
+<h3>La misma arquitectura, vista desde el protocolo</h3>
+<p>El Host coordina al usuario, al modelo y a las herramientas; el Client descubre con <code>tools/list</code> e invoca con <code>tools/call</code>. Fíjese en la única flecha que escribe en la cadena.</p>
+<div class="diag">
+<svg viewBox="0 0 1000 604" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arquitectura MCP de Voltera vista desde el protocolo: host, client, tres servidores y la firma humana como unica escritura">
+<defs>
+<marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6b7a89"/></marker>
+<marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c9821f"/></marker>
+<style>
+.l2{font:700 10.5px Inter,sans-serif;fill:#8795a3;letter-spacing:1.2px}
+.t2{font:650 13.5px Inter,sans-serif;fill:#16202b}
+.s2{font:400 11px Inter,sans-serif;fill:#6b7a89}
+.a2{font:500 10px Inter,sans-serif;fill:#8795a3}
+.g2{fill:#f8fafc;stroke:#e4eaf0;stroke-width:1}
+.b2{fill:#fff;stroke:#dde4ea;stroke-width:1}
+.m2{fill:#edf3fa;stroke:#a9c8e0;stroke-width:1}
+.d2{fill:#f0f9f5;stroke:#9ad4ba;stroke-width:1.5}
+.h2{fill:#fff6ea;stroke:#e8b877;stroke-width:1.5}
+.c2{fill:#fff;stroke:#9ad4ba;stroke-width:1.5}
+.n2{stroke:#6b7a89;stroke-width:1.4;fill:none}
+.o2{stroke:#c9821f;stroke-width:2.2;fill:none}
+</style>
+</defs>
+
+<rect class="m2" x="16" y="14" width="968" height="50" rx="8"/>
+<text class="t2" x="32" y="36">Aplicación Voltera (web y móvil)</text>
+<text class="s2" x="32" y="53">Modo A: el usuario pregunta · Modo B: notificación push</text>
+
+<rect class="g2" x="16" y="88" width="700" height="196" rx="8"/>
+<text class="l2" x="32" y="106">MCP HOST · COORDINA USUARIO, MODELO Y HERRAMIENTAS</text>
+<rect class="d2" x="32" y="116" width="322" height="76" rx="8"/>
+<text class="t2" x="48" y="140">Política de decisión</text>
+<text class="s2" x="48" y="158">determinista, sin LLM</text><text class="s2" x="48" y="175">vender · comprar · esperar</text>
+<rect class="b2" x="366" y="116" width="334" height="76" rx="8"/>
+<text class="t2" x="382" y="140">Agente (LLM)</text>
+<text class="s2" x="382" y="158">explica y dialoga</text><text class="s2" x="382" y="175">no decide</text>
+<rect class="c2" x="32" y="204" width="668" height="62" rx="8"/>
+<text class="t2" x="48" y="228">MCP Client</text>
+<text class="s2" x="48" y="246">descubre con tools/list e invoca con tools/call</text>
+
+<rect class="h2" x="756" y="116" width="228" height="104" rx="8"/>
+<text class="t2" x="772" y="142">Firma humana</text>
+<text class="s2" x="772" y="160">MetaMask · biometría</text>
+<text class="s2" x="772" y="180">el único punto que</text><text class="s2" x="772" y="196">escribe en la cadena</text>
+
+<rect class="g2" x="16" y="308" width="700" height="132" rx="8"/>
+<text class="l2" x="32" y="326">SERVIDORES MCP · AQUÍ SE JUEGA EL TEMA</text>
+<rect class="m2" x="32" y="336" width="214" height="92" rx="8"/>
+<text class="t2" x="46" y="360">mcp-conocimiento</text>
+<text class="s2" x="46" y="378">reglas CREG y del</text><text class="s2" x="46" y="394">mercado (RAG)</text>
+<rect class="m2" x="258" y="336" width="214" height="92" rx="8"/>
+<text class="t2" x="272" y="360">mcp-energia</text>
+<text class="s2" x="272" y="378">batería, generación</text><text class="s2" x="272" y="394">y precio por franja</text>
+<rect class="m2" x="484" y="336" width="216" height="92" rx="8"/>
+<text class="t2" x="498" y="360">mcp-mercado</text>
+<text class="s2" x="498" y="378">ofertas, certificados</text><text class="s2" x="498" y="394">y pasos sin firmar</text>
+
+<rect class="g2" x="16" y="464" width="700" height="132" rx="8"/>
+<text class="l2" x="32" y="482">SISTEMAS EXISTENTES · MÓDULOS 2, 3 Y 4</text>
+<rect class="b2" x="32" y="492" width="214" height="92" rx="8"/>
+<text class="t2" x="46" y="516">Corpus regulatorio</text>
+<text class="s2" x="46" y="534">Resoluciones CREG y</text><text class="s2" x="46" y="550">términos del mercado</text>
+<rect class="b2" x="258" y="492" width="214" height="92" rx="8"/>
+<text class="t2" x="272" y="516">Microservicios</text>
+<text class="s2" x="272" y="534">ms-energy-device</text><text class="s2" x="272" y="550">ms-energy-settlement</text>
+<rect class="b2" x="484" y="492" width="216" height="92" rx="8"/>
+<text class="t2" x="498" y="516">Polygon Amoy</text>
+<text class="s2" x="498" y="534">certificado, token</text><text class="s2" x="498" y="550">y mercado</text>
+
+<path class="n2" d="M193,64 L193,110" marker-end="url(#ah2)"/>
+<text class="a2" x="201" y="90">pregunta o evento</text>
+<path class="n2" d="M354,154 L360,154" marker-end="url(#ah2)"/>
+<path class="n2" d="M193,192 L193,198" marker-end="url(#ah2)"/>
+<path class="n2" d="M533,192 L533,198" marker-end="url(#ah2)"/>
+<path class="n2" d="M366,266 L366,330" marker-end="url(#ah2)"/>
+<text class="a2" x="374" y="296">JSON-RPC</text>
+<path class="n2" d="M139,428 L139,486" marker-end="url(#ah2)"/>
+<text class="a2" x="147" y="462">lee</text>
+<path class="n2" d="M365,428 L365,486" marker-end="url(#ah2)"/>
+<text class="a2" x="373" y="462">lee</text>
+<path class="n2" d="M592,428 L592,486" marker-end="url(#ah2)"/>
+<text class="a2" x="600" y="462">lee</text>
+<path class="n2" d="M700,154 L750,154" marker-end="url(#ah2)"/>
+<text class="a2" x="704" y="144">pasos sin firmar</text>
+<path class="o2" d="M870,220 L870,538 L706,538" marker-end="url(#ah3)"/>
+<text class="a2" x="760" y="530" style="fill:#a3650f">única escritura</text>
+</svg>
+</div>
+<p class="cap"><strong>Verde:</strong> decide de forma determinista, sin modelo · <strong>Azul:</strong> los servidores MCP · <strong>Ámbar:</strong> lo único que escribe en la cadena. Ningún servidor envía transacciones.</p>
+
 <h3>Gestión del contexto</h3>
 <p>El agente <strong>nunca recibe la lista completa de ofertas</strong>. El servidor MCP filtra y devuelve solo las cinco mejores por precio por kWh, ya verificadas. El filtro vive en la herramienta, no en el modelo: menos tokens, menos costo y menos superficie para una instrucción inyectada.</p>
 
