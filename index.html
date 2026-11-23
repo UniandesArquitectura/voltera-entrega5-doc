@@ -166,7 +166,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 <h2><span class="num">00</span>La arquitectura en un diagrama</h2>
 <p class="lede">El azul son los servidores MCP, donde se juega el tema asignado. El verde es la pieza determinista que decide. El ámbar es donde interviene una persona.</p>
 <div class="diag">
-<svg viewBox="0 0 1000 664" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arquitectura de IA de Voltera por capas: experiencia, orquestacion, herramientas MCP, sistemas existentes, plataforma y seguridad">
+<svg viewBox="0 -104 1000 768" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arquitectura de IA de Voltera por capas: experiencia, orquestacion, herramientas MCP, sistemas existentes, plataforma y seguridad">
 <defs>
 <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#6b7a89"/></marker>
 <style>
@@ -183,7 +183,14 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 </style>
 </defs>
 
-<text class="lab" x="16" y="24">EXPERIENCIA</text>
+<text class="lab" x="16" y="-82">APLICACIONES DE IA · SOBRE LA MISMA PLATAFORMA COMPARTIDA</text>
+<rect class="dec" x="16" y="-72" width="314" height="56" rx="8"/>
+<text class="t" x="30" y="-50">Asesor de energía</text><text class="s" x="30" y="-33">este caso</text>
+<rect class="bx" x="342" y="-72" width="314" height="56" rx="8" stroke-dasharray="5 3"/>
+<text class="t" x="356" y="-50">Copiloto de factura</text><text class="s" x="356" y="-33">misma plataforma, otra aplicación</text>
+<rect class="bx" x="668" y="-72" width="314" height="56" rx="8" stroke-dasharray="5 3"/>
+<text class="t" x="682" y="-50">Asistente de regulación</text><text class="s" x="682" y="-33">misma plataforma, otra aplicación</text>
+<text class="lab" x="16" y="24">CANALES Y EXPERIENCIA</text>
 <rect class="bx" x="16" y="36" width="163" height="84" rx="8"/>
 <text class="t" x="30" y="62">Notificación push</text>
 <text class="s" x="30" y="82">Modo B · así se</text><text class="s" x="30" y="98">entera si no está</text>
@@ -225,7 +232,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 <text class="c" x="494" y="354">buscar_reglas</text>
 <text class="s" x="494" y="374">→ fragmento y fuente</text><text class="s" x="494" y="392">el RAG como</text><text class="s" x="494" y="408">herramienta</text>
 
-<text class="lab" x="16" y="460">SISTEMAS EXISTENTES · YA CONSTRUIDOS</text>
+<text class="lab" x="16" y="460">SOLUCIONES EMPRESARIALES EXISTENTES · YA CONSTRUIDAS</text>
 <rect class="bx" x="16" y="472" width="163" height="84" rx="8"/>
 <text class="t" x="30" y="498">Batería y precio</text><text class="s" x="30" y="518">simulado</text>
 <rect class="bx" x="189" y="472" width="163" height="84" rx="8"/>
@@ -235,15 +242,19 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 <rect class="bx" x="535" y="472" width="163" height="84" rx="8"/>
 <text class="t" x="549" y="498">⑦ Amoy</text><text class="s" x="549" y="518">ERC-721 · ERC-20</text><text class="s" x="549" y="534">Mercado</text>
 
-<text class="lab" x="720" y="24">PLATAFORMA</text>
-<rect class="bx" x="720" y="36" width="264" height="120" rx="8"/>
-<text class="t" x="734" y="64">LLM frontier</text><text class="s" x="734" y="86">un solo modelo para</text><text class="s" x="734" y="102">los dos agentes</text><text class="s" x="734" y="118">el router no usa LLM</text>
-<rect class="bx" x="720" y="168" width="264" height="120" rx="8"/>
-<text class="t" x="734" y="196">Conocimiento (RAG)</text><text class="s" x="734" y="218">reglas del mercado</text><text class="s" x="734" y="234">regulación CREG</text><text class="s" x="734" y="250">índice e ingesta</text>
-<rect class="bx" x="720" y="300" width="264" height="120" rx="8"/>
-<text class="t" x="734" y="328">Recomendación vigente</text><text class="s" x="734" y="350">caduca a los 5 a 10 min</text><text class="s" x="734" y="366">se revalida al abrir</text><text class="s" x="734" y="382">vive fuera del proceso</text>
-<rect class="bx" x="720" y="432" width="264" height="124" rx="8"/>
-<text class="t" x="734" y="460">Traza y evaluación</text><text class="s" x="734" y="482">cada llamada: quién,</text><text class="s" x="734" y="498">qué herramienta</text><text class="s" x="734" y="514">y qué devolvió</text>
+<text class="lab" x="720" y="24">PLATAFORMA DE IA (COMPARTIDA)</text>
+<rect class="bx" x="720" y="36" width="264" height="78" rx="8"/>
+<text class="t" x="734" y="60">LLM frontier</text><text class="s" x="734" y="80">un solo modelo para los dos agentes</text><text class="s" x="734" y="98">el router no usa LLM</text>
+<rect class="bx" x="720" y="124" width="264" height="78" rx="8"/>
+<text class="t" x="734" y="148">Conocimiento (RAG)</text><text class="s" x="734" y="168">índice e ingesta sobre</text><text class="s" x="734" y="186">las resoluciones CREG</text>
+<rect class="bx" x="720" y="212" width="264" height="78" rx="8"/>
+<text class="t" x="734" y="236">Contexto</text><text class="s" x="734" y="256">solo las 5 mejores ofertas</text><text class="s" x="734" y="274">el filtro vive en la herramienta</text>
+<rect class="bx" x="720" y="300" width="264" height="78" rx="8"/>
+<text class="t" x="734" y="324">Prompts</text><text class="s" x="734" y="344">uno por agente, en git</text><text class="s" x="734" y="362">el resumen lo escribe el servidor</text>
+<rect class="bx" x="720" y="388" width="264" height="78" rx="8"/>
+<text class="t" x="734" y="412">Recomendación vigente</text><text class="s" x="734" y="432">caduca a los 5 a 10 min</text><text class="s" x="734" y="450">se revalida al abrir</text>
+<rect class="bx" x="720" y="476" width="264" height="78" rx="8"/>
+<text class="t" x="734" y="500">Evaluación y trazas</text><text class="s" x="734" y="520">cada llamada: quién, qué</text><text class="s" x="734" y="538">herramienta y qué devolvió</text>
 
 <path class="ln" d="M250,120 L250,156" marker-end="url(#ah)"/>
 <text class="al" x="258" y="142">pregunta</text>
@@ -255,15 +266,12 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 <text class="al" x="365" y="452">solo lectura</text>
 <path class="ln" d="M616,120 L709,120 L709,514 L704,514" marker-end="url(#ah)"/>
 
-<text class="lab" x="16" y="590">SEGURIDAD · ZERO TRUST · NINGUNA CAPA CONFÍA EN EL MODELO</text>
-<rect class="bx" x="16" y="602" width="234" height="46" rx="8"/>
-<text class="s" x="30" y="631">Identidad = wallet del usuario</text>
-<rect class="bx" x="260" y="602" width="234" height="46" rx="8"/>
-<text class="s" x="274" y="631">Token por servidor MCP</text>
-<rect class="hum" x="504" y="602" width="234" height="46" rx="8"/>
-<text class="s" x="518" y="631">El agente no tiene llave privada</text>
-<rect class="hum" x="748" y="602" width="236" height="46" rx="8"/>
-<text class="s" x="762" y="631">Siempre firma una persona</text>
+<text class="lab" x="16" y="590">BANDA TRANSVERSAL · SEGURIDAD, PRIVACIDAD Y RESPONSIBLE AI · NINGUNA CAPA CONFÍA EN EL MODELO</text>
+<rect class="bx" x="16" y="602" width="185" height="46" rx="8"/><text class="s" x="28" y="631">Identidad = wallet</text>
+<rect class="bx" x="211" y="602" width="185" height="46" rx="8"/><text class="s" x="223" y="631">Token por servidor MCP</text>
+<rect class="hum" x="406" y="602" width="185" height="46" rx="8"/><text class="s" x="418" y="631">El agente no tiene llave</text>
+<rect class="hum" x="601" y="602" width="185" height="46" rx="8"/><text class="s" x="613" y="631">Siempre firma una persona</text>
+<rect class="bx" x="796" y="602" width="186" height="46" rx="8"/><text class="s" x="808" y="631">Zero-retention en el modelo</text>
 </svg>
 </div>
 <p class="cap">La flecha larga de la derecha es la transacción ya firmada: sale de MetaMask directo al contrato, sin pasar por ningún servidor. Los números siguen el flujo del ① al ⑦.</p>
@@ -552,22 +560,23 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 <h2><span class="num">07</span>Decisiones del tema asignado</h2>
 <p class="lede">Punto 4 de la rúbrica, 40% de la nota.</p>
 <div class="tw"><table>
-<thead><tr><th>Decisión</th><th>Alternativa descartada</th><th>Trade-off</th></tr></thead>
+<thead><tr><th>Decisión</th><th>Alternativa descartada</th><th>Trade-off: qué se gana y qué se paga</th><th>Atributo que la motiva</th><th>Módulo</th></tr></thead>
 <tbody>
-<tr><td>Adoptar MCP como protocolo estándar para conectar los agentes con las capacidades de Voltera</td><td>Integraciones propietarias, una por cada modelo y cada API REST</td><td>Gana interoperabilidad, reutilización y menor acoplamiento entre la IA y los sistemas; paga una capa tecnológica más, con su aprendizaje y su mantenimiento</td></tr>
-<tr><td>Las reglas del dominio se quedan en los microservicios y en el contrato; MCP es solo el adaptador de herramientas</td><td>Que el modelo acceda directo a las bases de datos, o trasladar las reglas a los servidores MCP</td><td>Gana separación de responsabilidades, integridad de las reglas y reutilización de lo que ya existe; paga latencia por el salto entre MCP y los microservicios. <strong>La política de recomendación es la excepción: vive en la orquestación, en código y aparte</strong></td></tr>
-<tr><td>Un servidor MCP por dominio</td><td>Uno solo con todas las herramientas</td><td>Gana aislamiento de permisos y despliegue independiente; paga más endpoints que operar</td></tr>
-<tr><td><strong>Ninguna herramienta firma</strong></td><td>Una herramienta <code>comprar</code> que ejecute</td><td>Gana que un error o manipulación del modelo no mueve dinero; paga un paso más</td></tr>
-<tr><td><strong>La decisión vive en código, no en el prompt</strong></td><td>Que el LLM decida si conviene vender</td><td>Gana resultado auditable y repetible; paga flexibilidad</td></tr>
-<tr><td>El filtro de ofertas vive en la herramienta</td><td>Mandar todas las ofertas al contexto</td><td>Gana costo y seguridad; paga que el modelo no ve el universo completo</td></tr>
-<tr><td>Las <code>preparar_*</code> devuelven una secuencia de pasos</td><td>Devolver una sola transacción</td><td>Gana que el flujo real cabe en la herramienta; paga un cliente que entienda secuencias</td></tr>
-<tr><td>La transacción se arma al firmar</td><td>Armarla junto con la recomendación</td><td>Gana que no se firma contra estado viejo; paga una llamada extra</td></tr>
-<tr><td>La identidad del usuario viaja hasta la herramienta</td><td>Identidad de servicio única</td><td>Gana autorización por usuario y trazabilidad; paga manejo de expiración</td></tr>
-<tr><td>Transporte HTTP</td><td>stdio embebido en el agente</td><td>Gana reutilización y permite mezclar lenguajes; paga red, auth y operación</td></tr>
-<tr><td>El RAG se expone como herramienta MCP</td><td>Que el agente consulte el índice directo</td><td>Gana una sola puerta con la misma auth y traza; paga un salto</td></tr>
-<tr><td><strong>Ningún servidor MCP para el oráculo</strong></td><td>Un cuarto servidor que envolviera al oráculo</td><td>Gana que el agente no puede disparar una verificación, que es justo el poder que le quitamos; paga que el resultado solo llega como el <code>status</code> que ya lee <code>mcp-mercado</code>. <strong>Qué no se expone como herramienta también es una decisión de diseño</strong></td></tr>
-<tr><td>Las anotaciones son señal, no control</td><td>Confiar en la anotación de solo lectura</td><td>Gana claridad para el modelo; paga que el control real está en el permiso</td></tr>
+<tr><td>Adoptar MCP como protocolo estándar para conectar los agentes con las capacidades de Voltera</td><td>Integraciones propietarias, una por cada modelo y cada API REST</td><td>Gana interoperabilidad, reutilización y menor acoplamiento entre la IA y los sistemas; paga una capa tecnológica más, con su aprendizaje y su mantenimiento</td><td>Facilidad de integración</td><td>5 y 2</td></tr>
+<tr><td>Las reglas del dominio se quedan en los microservicios y en el contrato; MCP es solo el adaptador de herramientas</td><td>Que el modelo acceda directo a las bases de datos, o trasladar las reglas a los servidores MCP</td><td>Gana separación de responsabilidades, integridad de las reglas y reutilización de lo que ya existe; paga latencia por el salto entre MCP y los microservicios. <strong>La política de recomendación es la excepción: vive en la orquestación, en código y aparte</strong></td><td>Seguridad e integridad de las reglas</td><td>2 y 5</td></tr>
+<tr><td>Un servidor MCP por dominio</td><td>Uno solo con todas las herramientas</td><td>Gana aislamiento de permisos y despliegue independiente; paga más endpoints que operar</td><td>Modificabilidad y seguridad</td><td>5</td></tr>
+<tr><td><strong>Ninguna herramienta firma</strong></td><td>Una herramienta <code>comprar</code> que ejecute</td><td>Gana que un error o manipulación del modelo no mueve dinero; paga un paso más</td><td><strong>Auditabilidad ante el regulador</strong></td><td>5</td></tr>
+<tr><td><strong>La decisión vive en código, no en el prompt</strong></td><td>Que el LLM decida si conviene vender</td><td>Gana resultado auditable y repetible; paga flexibilidad</td><td><strong>Auditabilidad ante el regulador</strong></td><td>5</td></tr>
+<tr><td>El filtro de ofertas vive en la herramienta</td><td>Mandar todas las ofertas al contexto</td><td>Gana costo y seguridad; paga que el modelo no ve el universo completo</td><td>Eficiencia económica y seguridad</td><td>5</td></tr>
+<tr><td>Las <code>preparar_*</code> devuelven una secuencia de pasos</td><td>Devolver una sola transacción</td><td>Gana que el flujo real cabe en la herramienta; paga un cliente que entienda secuencias</td><td>Facilidad de integración</td><td>4 y 5</td></tr>
+<tr><td>La transacción se arma al firmar</td><td>Armarla junto con la recomendación</td><td>Gana que no se firma contra estado viejo; paga una llamada extra</td><td>Corrección</td><td>4 y 5</td></tr>
+<tr><td>La identidad del usuario viaja hasta la herramienta</td><td>Identidad de servicio única</td><td>Gana autorización por usuario y trazabilidad; paga manejo de expiración</td><td>Seguridad: mínimo privilegio</td><td>2 y 5</td></tr>
+<tr><td>Transporte HTTP</td><td>stdio embebido en el agente</td><td>Gana reutilización y permite mezclar lenguajes; paga red, auth y operación</td><td>Facilidad de modificación</td><td>5</td></tr>
+<tr><td>El RAG se expone como herramienta MCP</td><td>Que el agente consulte el índice directo</td><td>Gana una sola puerta con la misma auth y traza; paga un salto</td><td>Seguridad y trazabilidad</td><td>5</td></tr>
+<tr><td><strong>Ningún servidor MCP para el oráculo</strong></td><td>Un cuarto servidor que envolviera al oráculo</td><td>Gana que el agente no puede disparar una verificación, que es justo el poder que le quitamos; paga que el resultado solo llega como el <code>status</code> que ya lee <code>mcp-mercado</code>. <strong>Qué no se expone como herramienta también es una decisión de diseño</strong></td><td>Seguridad</td><td>4 y 5</td></tr>
+<tr><td>Las anotaciones son señal, no control</td><td>Confiar en la anotación de solo lectura</td><td>Gana claridad para el modelo; paga que el control real está en el permiso</td><td>Seguridad</td><td>5</td></tr>
 </tbody></table></div>
+<p class="cap">Cada fila es un ADR: decisión, alternativa descartada, trade-off, atributo de calidad que la motiva y módulo del curso en el que se apoya. <strong>La arquitectura se defiende con sus decisiones, no con su dibujo.</strong></p>
 <div class="key">
   <div class="t">Respaldo en la especificación de MCP</div>
   <p>Las herramientas son ejecución de código arbitrario y deben tratarse con precaución; las anotaciones de comportamiento deben considerarse no confiables salvo que vengan de un servidor confiable; y el host debe obtener consentimiento explícito del usuario antes de invocar cualquier herramienta. <strong>Que firme la persona es el principio de seguridad del propio protocolo.</strong></p>
