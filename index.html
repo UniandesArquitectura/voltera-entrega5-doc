@@ -164,6 +164,303 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 
 <section id="diagrama">
 <h2><span class="num">00</span>La arquitectura en un diagrama</h2>
+<p class="lede">Diagrama de componentes en notación UML. Cada caja es un componente con su estereotipo y la interfaz que ofrece; cada flecha punteada es una dependencia «use» etiquetada con la interfaz que consume. Lo punteado en el borde es lo que Voltera no opera.</p>
+<div class="diag">
+<svg viewBox="0 0 1010 966" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de componentes UML de la arquitectura de IA de Voltera: canales, aplicaciones de IA, orquestacion, herramientas MCP, conocimiento y modelos, gobierno y soluciones existentes">
+<defs>
+<marker id="uah" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0.5 0.5 L9.5 5 L0.5 9.5" fill="none" stroke="#7a8794" stroke-width="1.3"/></marker>
+<marker id="uahb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c8871f"/></marker>
+<style>
+.upkg{fill:#fbfcfd;stroke:#ccd6de;stroke-width:1}
+.upkgm{fill:#f6fafd;stroke:#a9c8e0;stroke-width:1}
+.utab{fill:#eef2f6;stroke:#ccd6de;stroke-width:1}
+.utabm{fill:#dfecf7;stroke:#a9c8e0;stroke-width:1}
+.upl{font:650 10.5px Inter,sans-serif;fill:#5b6876}
+.ust{font:500 9px Inter,sans-serif;fill:#93a0ad}
+.unm{font:650 12.5px Inter,sans-serif;fill:#16202b}
+.unmc{font:600 12px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#174970}
+.udt{font:400 9.5px Inter,sans-serif;fill:#6b7a89}
+.uif{font:500 9.5px ui-monospace,SFMono-Regular,Menlo,monospace;fill:#174970}
+.ual{font:500 8.5px Inter,sans-serif;fill:#8795a3}
+.uala{font:600 8.5px Inter,sans-serif;fill:#b07614}
+.ubx{fill:#fff;stroke:#dde4ea;stroke-width:1}
+.umcp{fill:#edf3fa;stroke:#9fc2de;stroke-width:1.2}
+.udec{fill:#f0f9f5;stroke:#9ed3bb;stroke-width:1.2}
+.uhum{fill:#fff8ea;stroke:#e8c583;stroke-width:1.2}
+.uled{fill:#f4f0fb;stroke:#b8a6de;stroke-width:1.2}
+.udsh{fill:#fff;stroke:#c3ccd5;stroke-width:1;stroke-dasharray:5 3}
+.uextd{fill:#fcfcfd;stroke:#aab6c2;stroke-width:1;stroke-dasharray:5 3}
+.uledd{fill:#f4f0fb;stroke:#b8a6de;stroke-width:1.2;stroke-dasharray:5 3}
+.uln{stroke:#7a8794;stroke-width:1.15;fill:none;stroke-dasharray:5 3.5}
+.ulnb{stroke:#7a8794;stroke-width:1.15;fill:none}
+.uamb{stroke:#c8871f;stroke-width:2;fill:none}
+</style>
+</defs>
+<rect class="utab" x="18" y="6" width="86" height="16" rx="3"/>
+<rect class="upkg" x="18" y="22" width="942" height="118" rx="4"/>
+<text class="upl" x="32" y="43">«subsystem» Canales y experiencia</text>
+<rect class="ubx" x="32" y="52" width="201" height="76" rx="5"/>
+<g fill="#fff" stroke="#dde4ea" stroke-width="1">
+<rect x="206" y="61" width="19" height="14" rx="1"/>
+<rect x="202" y="63" width="8" height="3.5" rx="1"/>
+<rect x="202" y="69" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="46" y="72">«Channel»</text>
+<text class="unm" x="46" y="90">Notificación push</text>
+<text class="udt" x="46" y="108">Modo B · el sistema avisa</text>
+<rect class="ubx" x="269" y="52" width="201" height="76" rx="5"/>
+<g fill="#fff" stroke="#dde4ea" stroke-width="1">
+<rect x="443" y="61" width="19" height="14" rx="1"/>
+<rect x="439" y="63" width="8" height="3.5" rx="1"/>
+<rect x="439" y="69" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="283" y="72">«UI»</text>
+<text class="unm" x="283" y="90">App Voltera (dApp)</text>
+<text class="udt" x="283" y="108">REST · SIWE → JWT 15 min</text>
+<rect class="uhum" x="743" y="52" width="201" height="76" rx="5"/>
+<g fill="#fff" stroke="#e8c583" stroke-width="1">
+<rect x="917" y="61" width="19" height="14" rx="1"/>
+<rect x="913" y="63" width="8" height="3.5" rx="1"/>
+<rect x="913" y="69" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="757" y="72">«UI»</text>
+<text class="unm" x="757" y="90">Firma humana</text>
+<text class="udt" x="757" y="108">MetaMask · firma EIP-712</text>
+<rect class="utab" x="18" y="160" width="86" height="16" rx="3"/>
+<rect class="upkg" x="18" y="176" width="942" height="118" rx="4"/>
+<text class="upl" x="32" y="197">«subsystem» Aplicaciones de IA</text>
+<rect class="udec" x="32" y="206" width="201" height="76" rx="5"/>
+<g fill="#fff" stroke="#9ed3bb" stroke-width="1">
+<rect x="206" y="215" width="19" height="14" rx="1"/>
+<rect x="202" y="217" width="8" height="3.5" rx="1"/>
+<rect x="202" y="223" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="46" y="226">«Agent»</text>
+<text class="unm" x="46" y="244">Asesor de energía</text>
+<text class="udt" x="46" y="262">este caso</text>
+<rect class="udsh" x="269" y="206" width="201" height="76" rx="5"/>
+<g fill="#fff" stroke="#c3ccd5" stroke-width="1">
+<rect x="443" y="215" width="19" height="14" rx="1"/>
+<rect x="439" y="217" width="8" height="3.5" rx="1"/>
+<rect x="439" y="223" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="283" y="226">«Agent»</text>
+<text class="unm" x="283" y="244">Copiloto de factura</text>
+<text class="udt" x="283" y="262">misma plataforma</text>
+<rect class="udsh" x="506" y="206" width="201" height="76" rx="5"/>
+<g fill="#fff" stroke="#c3ccd5" stroke-width="1">
+<rect x="680" y="215" width="19" height="14" rx="1"/>
+<rect x="676" y="217" width="8" height="3.5" rx="1"/>
+<rect x="676" y="223" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="520" y="226">«Agent»</text>
+<text class="unm" x="520" y="244">Asistente de regulación</text>
+<text class="udt" x="520" y="262">misma plataforma</text>
+<rect class="utab" x="18" y="314" width="86" height="16" rx="3"/>
+<rect class="upkg" x="18" y="330" width="942" height="118" rx="4"/>
+<text class="upl" x="32" y="351">«subsystem» Orquestación</text>
+<rect class="ubx" x="32" y="360" width="201" height="76" rx="5"/>
+<g fill="#fff" stroke="#dde4ea" stroke-width="1">
+<rect x="206" y="369" width="19" height="14" rx="1"/>
+<rect x="202" y="371" width="8" height="3.5" rx="1"/>
+<rect x="202" y="377" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="46" y="380">«Runtime»</text>
+<text class="unm" x="46" y="398">Supervisor</text>
+<text class="udt" x="46" y="416">ruteo por reglas · máx. 8 pasos</text>
+<rect class="udec" x="269" y="360" width="201" height="76" rx="5"/>
+<g fill="#fff" stroke="#9ed3bb" stroke-width="1">
+<rect x="443" y="369" width="19" height="14" rx="1"/>
+<rect x="439" y="371" width="8" height="3.5" rx="1"/>
+<rect x="439" y="377" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="283" y="380">«PolicyEngine»</text>
+<text class="unm" x="283" y="398">Política de decisión</text>
+<text class="udt" x="283" y="416">evaluarOportunidad() · sin LLM</text>
+<rect class="ubx" x="506" y="360" width="201" height="76" rx="5"/>
+<g fill="#fff" stroke="#dde4ea" stroke-width="1">
+<rect x="680" y="369" width="19" height="14" rx="1"/>
+<rect x="676" y="371" width="8" height="3.5" rx="1"/>
+<rect x="676" y="377" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="520" y="380">«Agent»</text>
+<text class="unm" x="520" y="398">Agentes especializados</text>
+<text class="udt" x="520" y="416">mercado y conocimiento · explican</text>
+<rect class="ubx" x="743" y="360" width="201" height="76" rx="5"/>
+<g fill="#fff" stroke="#dde4ea" stroke-width="1">
+<rect x="917" y="369" width="19" height="14" rx="1"/>
+<rect x="913" y="371" width="8" height="3.5" rx="1"/>
+<rect x="913" y="377" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="757" y="380">«Store»</text>
+<text class="unm" x="757" y="398">Recomendación vigente</text>
+<text class="udt" x="757" y="416">caduca y se revalida</text>
+<rect class="utabm" x="18" y="468" width="86" height="16" rx="3"/>
+<rect class="upkgm" x="18" y="484" width="942" height="130" rx="4"/>
+<text class="upl" x="32" y="505">«subsystem» Herramientas · MCP</text>
+<rect class="umcp" x="32" y="514" width="201" height="88" rx="5"/>
+<g fill="#fff" stroke="#9fc2de" stroke-width="1">
+<rect x="206" y="523" width="19" height="14" rx="1"/>
+<rect x="202" y="525" width="8" height="3.5" rx="1"/>
+<rect x="202" y="531" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="46" y="534">«MCPClient»</text>
+<text class="unm" x="46" y="552">MCP Client</text>
+<text class="udt" x="46" y="570">un cliente por servidor</text>
+<text class="uif" x="46" y="588">tools/list · tools/call</text>
+<rect class="umcp" x="269" y="514" width="201" height="88" rx="5"/>
+<g fill="#fff" stroke="#9fc2de" stroke-width="1">
+<rect x="443" y="523" width="19" height="14" rx="1"/>
+<rect x="439" y="525" width="8" height="3.5" rx="1"/>
+<rect x="439" y="531" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="283" y="534">«MCPServer»</text>
+<text class="unmc" x="283" y="552">mcp-conocimiento</text>
+<text class="udt" x="283" y="570">1 herramienta · solo lectura</text>
+<text class="uif" x="283" y="588">tools/call</text>
+<rect class="umcp" x="506" y="514" width="201" height="88" rx="5"/>
+<g fill="#fff" stroke="#9fc2de" stroke-width="1">
+<rect x="680" y="523" width="19" height="14" rx="1"/>
+<rect x="676" y="525" width="8" height="3.5" rx="1"/>
+<rect x="676" y="531" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="520" y="534">«MCPServer»</text>
+<text class="unmc" x="520" y="552">mcp-energia</text>
+<text class="udt" x="520" y="570">3 herramientas · solo lectura</text>
+<text class="uif" x="520" y="588">tools/call</text>
+<rect class="umcp" x="743" y="514" width="201" height="88" rx="5"/>
+<g fill="#fff" stroke="#9fc2de" stroke-width="1">
+<rect x="917" y="523" width="19" height="14" rx="1"/>
+<rect x="913" y="525" width="8" height="3.5" rx="1"/>
+<rect x="913" y="531" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="757" y="534">«MCPServer»</text>
+<text class="unmc" x="757" y="552">mcp-mercado</text>
+<text class="udt" x="757" y="570">5 herramientas · 0 firman</text>
+<text class="uif" x="757" y="588">tools/call</text>
+<rect class="utab" x="18" y="634" width="86" height="16" rx="3"/>
+<rect class="upkg" x="18" y="650" width="701" height="118" rx="4"/>
+<text class="upl" x="32" y="671">«subsystem» Conocimiento y modelos</text>
+<rect class="ubx" x="32" y="680" width="201" height="76" rx="5"/>
+<g fill="#fff" stroke="#dde4ea" stroke-width="1">
+<rect x="206" y="689" width="19" height="14" rx="1"/>
+<rect x="202" y="691" width="8" height="3.5" rx="1"/>
+<rect x="202" y="697" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="46" y="700">«Projection»</text>
+<text class="unm" x="46" y="718">Índice vectorial</text>
+<text class="udt" x="46" y="736">CREG · reglas de mercado</text>
+<rect class="ubx" x="269" y="680" width="201" height="76" rx="5"/>
+<g fill="#fff" stroke="#dde4ea" stroke-width="1">
+<rect x="443" y="689" width="19" height="14" rx="1"/>
+<rect x="439" y="691" width="8" height="3.5" rx="1"/>
+<rect x="439" y="697" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="283" y="700">«RAGService»</text>
+<text class="unm" x="283" y="718">Knowledge Service</text>
+<text class="udt" x="283" y="736">search</text>
+<rect class="uextd" x="506" y="680" width="201" height="76" rx="5"/>
+<g fill="#fff" stroke="#aab6c2" stroke-width="1">
+<rect x="680" y="689" width="19" height="14" rx="1"/>
+<rect x="676" y="691" width="8" height="3.5" rx="1"/>
+<rect x="676" y="697" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="520" y="700">«LLM» contratado</text>
+<text class="unm" x="520" y="718">Frontier LLM</text>
+<text class="udt" x="520" y="736">completions · zero-retention</text>
+<rect class="utab" x="731" y="634" width="86" height="16" rx="3"/>
+<rect class="upkg" x="731" y="650" width="229" height="118" rx="4"/>
+<text class="upl" x="745" y="671">«subsystem» Gobierno</text>
+<rect class="ubx" x="743" y="680" width="201" height="76" rx="5"/>
+<g fill="#fff" stroke="#dde4ea" stroke-width="1">
+<rect x="917" y="689" width="19" height="14" rx="1"/>
+<rect x="913" y="691" width="8" height="3.5" rx="1"/>
+<rect x="913" y="697" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="757" y="700">«Observability»</text>
+<text class="unm" x="757" y="718">Evals &amp; Tracing</text>
+<text class="udt" x="757" y="736">OTLP · umbrales versionados</text>
+<rect class="utab" x="18" y="788" width="86" height="16" rx="3"/>
+<rect class="upkg" x="18" y="804" width="942" height="118" rx="4"/>
+<text class="upl" x="32" y="825">«subsystem» Soluciones empresariales existentes</text>
+<rect class="ubx" x="32" y="834" width="201" height="76" rx="5"/>
+<g fill="#fff" stroke="#dde4ea" stroke-width="1">
+<rect x="206" y="843" width="19" height="14" rx="1"/>
+<rect x="202" y="845" width="8" height="3.5" rx="1"/>
+<rect x="202" y="851" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="46" y="854">«Microservice»</text>
+<text class="unm" x="46" y="872">Microservicios Voltera</text>
+<text class="udt" x="46" y="890">ms-energy-device · settlement</text>
+<rect class="ubx" x="269" y="834" width="201" height="76" rx="5"/>
+<g fill="#fff" stroke="#dde4ea" stroke-width="1">
+<rect x="443" y="843" width="19" height="14" rx="1"/>
+<rect x="439" y="845" width="8" height="3.5" rx="1"/>
+<rect x="439" y="851" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="283" y="854">«System»</text>
+<text class="unm" x="283" y="872">API del medidor</text>
+<text class="udt" x="283" y="890">lectura firmada EIP-712</text>
+<rect class="uextd" x="506" y="834" width="201" height="76" rx="5"/>
+<g fill="#fff" stroke="#aab6c2" stroke-width="1">
+<rect x="680" y="843" width="19" height="14" rx="1"/>
+<rect x="676" y="845" width="8" height="3.5" rx="1"/>
+<rect x="676" y="851" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="520" y="854">«Oracle» externo</text>
+<text class="unm" x="520" y="872">Chainlink CRE</text>
+<text class="udt" x="520" y="890">no lo opera Voltera</text>
+<rect class="uledd" x="743" y="834" width="201" height="76" rx="5"/>
+<g fill="#fff" stroke="#b8a6de" stroke-width="1">
+<rect x="917" y="843" width="19" height="14" rx="1"/>
+<rect x="913" y="845" width="8" height="3.5" rx="1"/>
+<rect x="913" y="851" width="8" height="3.5" rx="1"/>
+</g>
+<text class="ust" x="757" y="854">«Ledger» externo</text>
+<text class="unm" x="757" y="872">Polygon Amoy</text>
+<text class="udt" x="757" y="890">ERC-721 · ERC-20 · Mercado</text>
+<path class="uln" d="M370,128 V160 H133 V206" marker-end="url(#uah)"/>
+<text class="ual" x="252" y="155" text-anchor="middle">«use» chat</text>
+<path class="uln" d="M100,206 V130" marker-end="url(#uah)"/>
+<text class="ual" x="104" y="172" text-anchor="start">«use»</text>
+<path class="uln" d="M133,282 V360" marker-end="url(#uah)"/>
+<text class="ual" x="138" y="326" text-anchor="start">«use»</text>
+<path class="uln" d="M233,398 H269" marker-end="url(#uah)"/>
+<text class="ual" x="251" y="390" text-anchor="middle">«use»</text>
+<path class="uln" d="M470,398 H506" marker-end="url(#uah)"/>
+<text class="ual" x="488" y="390" text-anchor="middle">«use»</text>
+<path class="uln" d="M707,398 H743" marker-end="url(#uah)"/>
+<text class="ual" x="725" y="390" text-anchor="middle">«use»</text>
+<path class="uln" d="M606,436 V470 H133 V514" marker-end="url(#uah)"/>
+<text class="ual" x="330" y="465" text-anchor="middle">«use» tools/call</text>
+<path class="ulnb" d="M133,602 V624 H880" stroke-dasharray="5 3.5"/>
+<path class="uln" d="M370,624 V604" marker-end="url(#uah)"/>
+<path class="uln" d="M606,624 V604" marker-end="url(#uah)"/>
+<path class="uln" d="M843,624 V604" marker-end="url(#uah)"/>
+<path class="uln" d="M880,624 V680" marker-end="url(#uah)"/>
+<text class="ual" x="205" y="641" text-anchor="start">JSON-RPC · tools/call</text>
+<text class="ual" x="886" y="644" text-anchor="start">OTLP</text>
+<path class="uln" d="M400,602 V680" marker-end="url(#uah)"/>
+<text class="ual" x="406" y="648" text-anchor="start">«use» search</text>
+<path class="uln" d="M269,718 H233" marker-end="url(#uah)"/>
+<text class="ual" x="251" y="710" text-anchor="middle">«use»</text>
+<path class="uln" d="M680,436 V462 H725 V718 H707" marker-end="url(#uah)"/>
+<text class="ual" x="729" y="500" text-anchor="start">«use» completions</text>
+<path class="uln" d="M560,602 V640 H488 V790 H370 V834" marker-end="url(#uah)"/>
+<text class="ual" x="494" y="784" text-anchor="start">«use» lee</text>
+<path class="uln" d="M650,602 V656 H251 V778 H133 V834" marker-end="url(#uah)"/>
+<text class="ual" x="257" y="792" text-anchor="start">«use» lee</text>
+<path class="uln" d="M944,558 H974 V872 H944" marker-end="url(#uah)"/>
+<text class="ual" x="966" y="638" text-anchor="end">«use» JSON-RPC</text>
+<path class="uln" d="M707,872 H743" marker-end="url(#uah)"/>
+<text class="ual" x="725" y="864" text-anchor="middle">«use»</text>
+<path class="uamb" d="M944,90 H992 V900 H944" marker-end="url(#uahb)"/>
+<text class="uala" x="986" y="318" text-anchor="end">tx firmada · única escritura en la cadena</text>
+<text class="ual" x="18" y="952">── ▸ dependencia «use», etiquetada con la interfaz que consume · borde punteado: componente que Voltera no opera · verde: ruta determinista · ámbar: la única escritura en la cadena, y la firma una persona</text>
+</svg>
+</div>
+<p class="cap">Las tres piezas que sostienen el tema asignado se leen de arriba abajo: un <code>MCP Client</code> por servidor, tres servidores con herramientas declaradas, y ninguna de ellas firma. La escritura en la cadena entra por un solo borde: la firma de la persona.</p>
+<h3>La misma arquitectura por capas</h3>
 <p class="lede">El azul son los servidores MCP, donde se juega el tema asignado. El verde es la pieza determinista que decide. El ámbar es donde interviene una persona.</p>
 <div class="diag">
 <svg viewBox="0 -104 1000 768" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arquitectura de IA de Voltera por capas: experiencia, orquestacion, herramientas MCP, sistemas existentes, plataforma y seguridad">
