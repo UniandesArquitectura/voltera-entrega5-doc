@@ -459,6 +459,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 <tr><td>La identidad del usuario viaja hasta la herramienta</td><td>Identidad de servicio única</td><td>Gana autorización por usuario y trazabilidad; paga manejo de expiración</td></tr>
 <tr><td>Transporte HTTP</td><td>stdio embebido en el agente</td><td>Gana reutilización y permite mezclar lenguajes; paga red, auth y operación</td></tr>
 <tr><td>El RAG se expone como herramienta MCP</td><td>Que el agente consulte el índice directo</td><td>Gana una sola puerta con la misma auth y traza; paga un salto</td></tr>
+<tr><td><strong>Ningún servidor MCP para el oráculo</strong></td><td>Un cuarto servidor que envolviera al oráculo</td><td>Gana que el agente no puede disparar una verificación, que es justo el poder que le quitamos; paga que el resultado solo llega como el <code>status</code> que ya lee <code>mcp-mercado</code>. <strong>Qué no se expone como herramienta también es una decisión de diseño</strong></td></tr>
 <tr><td>Las anotaciones son señal, no control</td><td>Confiar en la anotación de solo lectura</td><td>Gana claridad para el modelo; paga que el control real está en el permiso</td></tr>
 </tbody></table></div>
 <div class="key">
@@ -549,8 +550,8 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 <h3>Nivel 1 y 2 · la superficie de herramientas, ejecutada</h3>
 <p>El slice mínimo de <code>mcp-mercado</code> (cuatro herramientas de solo lectura más <code>preparar_compra</code>, que devuelve pasos sin firmar) y un agente que lo consume por MCP ya corren contra Amoy. La parte determinista del experimento, sobre el límite real de la herramienta, confirma:</p>
 <ul>
-  <li><strong>Cero</strong> herramientas capaces de firmar o enviar en el catálogo.</li>
-  <li>Una inyección que pide preparar una compra para otra wallet se rechaza: <code>IDENTIDAD_NO_COINCIDE</code>.</li>
+  <li>Sobre el catálogo real de los tres servidores: <strong>capaces de firmar o enviar, 0 de 9</strong>.</li>
+  <li>Una inyección que pide preparar una compra para otra wallet se rechaza: <code>IDENTIDAD_NO_COINCIDE</code>. El rechazo viaja como <code>isError=true</code>, es decir un <strong>error de ejecución de la herramienta y no de protocolo</strong>, que es la forma que recomienda la especificación de MCP para que el modelo pueda corregirse solo.</li>
   <li>Ninguna herramienta acepta una llave privada como parámetro.</li>
 </ul>
 <p>La parte probabilística —el agente bajo inyección, repetida N veces— mide cuántas veces el modelo obedece y cuántas transacciones se firman: cero, por diseño. Código y arnés en el repositorio <code>voltera-entrega5-mcp</code>.</p>
@@ -672,6 +673,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 <li>El usuario firma un mensaje de inicio de sesión con su wallet, con EIP-4361. El backend valida y emite un token de 15 minutos cuyo <code>sub</code> es la wallet en minúsculas.</li>
 <li>Viaja en <code>Authorization: Bearer</code> hacia cualquier servidor MCP.</li>
 <li><strong>Regla dura:</strong> la wallet del token es la única que las herramientas aceptan. Esto impide que una instrucción inyectada prepare una transacción a nombre de otro.</li>
+<li><strong>Por qué la herramienta recibe entonces una wallet como argumento:</strong> para que el rechazo sea explícito y auditable, y para poder demostrar el control. El valor que manda siempre es el del token. En producción el parámetro desaparece y la wallet se deriva solo del token, con lo que el ataque deja de ser expresable.</li>
 <li><code>prosumidorId</code> no existe: la wallet en minúsculas es el identificador único.</li>
 </ul>
 
@@ -732,7 +734,7 @@ Recibes el certificado y sus 125 kWh en tu wallet, en una sola operación.</code
 <tr><td>5</td><td>Supervisor y agente, apuntando a lo ya probado</td><td>4</td></tr>
 <tr><td>6</td><td>Tarjeta de recomendación, almacén con vigencia, firma</td><td>5</td></tr>
 <tr><td>7</td><td><code>mcp-conocimiento</code>, por secciones; el índice vectorial después</td><td>3</td></tr>
-<tr><td>8</td><td><code>preparar_publicacion</code> con su secuencia</td><td>1</td></tr>
+<tr><td>8</td><td><code>preparar_publicacion</code> con su secuencia — <strong>hecho</strong>: publica contra Amoy desde la tarjeta del Asesor</td><td>1</td></tr>
 </tbody></table></div>
 <p><strong>Los puntos 1, 2 y 4 son los que hay que tener sí o sí:</strong> con ellos ya hay demo y ya hay experimento.</p>
 
