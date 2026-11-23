@@ -294,6 +294,21 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
   <p><strong>La unidad de negociación es el certificado completo.</strong> <code>list()</code> toma el NFT y todos sus kWh, y el token tiene <code>decimals() = 0</code>. No se puede vender una parte de un certificado ni fracciones de kWh.</p>
 </div>
 
+<h3>El caso de uso, en corto</h3>
+<div class="tw"><table>
+<thead><tr><th>Lo que pide la rúbrica</th><th>En Voltera</th></tr></thead>
+<tbody>
+<tr><td>Qué lo dispara</td><td><strong>Modo A:</strong> el prosumidor pregunta desde la app · <strong>Modo B:</strong> un evento de precio pico, y el agente corre sin que nadie esté mirando</td></tr>
+<tr><td>Qué microservicios usa como herramientas</td><td><code>mcp-mercado</code> envuelve el mercado y los certificados en Amoy (Módulo 4) · <code>mcp-energia</code>, el medidor y la batería (Módulos 2 y 3) · <code>mcp-conocimiento</code>, el corpus regulatorio</td></tr>
+<tr><td>Qué decide la máquina</td><td>La política determinista decide vender, comprar o esperar, con umbrales en configuración. <strong>El LLM no decide:</strong> explica el porqué, responde sobre las reglas y maneja el ajuste</td></tr>
+<tr><td>Qué decide la persona</td><td>Firma o no firma en MetaMask. <strong>Es el único momento en que algo cambia en la cadena</strong></td></tr>
+<tr><td>Degradación elegante</td><td>Sin datos suficientes no hay recomendación, y se dice. El push igual sale con la regla fija</td></tr>
+</tbody></table></div>
+<div class="key">
+  <div class="t">Por qué no es una app de IA aparte</div>
+  <p><strong>Ningún servicio nuevo de negocio.</strong> La IA agregó dos capas sobre lo que ya existía: una que decide con reglas y otra que explica. El mercado, los certificados, el medidor y la regulación ya estaban, y se exponen como herramientas sin reescribirse.</p>
+</div>
+
 <h3>Dónde está el emparejamiento</h3>
 <p><strong>No hay motor de emparejamiento.</strong> El mercado es un tablero de ofertas publicadas: <code>buy(certificateId)</code> compra una oferta concreta al precio exacto. No existe libro de órdenes ni cruce automático.</p>
 <p>Por eso el agente no es decorativo: alguien tiene que mirar las ofertas, comparar precio por kWh, verificar procedencia y decidir. Lo determinista es <code>buy()</code>, que revierte si el precio no coincide.</p>
