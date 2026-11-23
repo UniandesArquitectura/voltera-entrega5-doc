@@ -391,7 +391,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 </g>
 <text class="ust" x="46" y="854">«Microservice»</text>
 <text class="unm" x="46" y="872">Microservicios Voltera</text>
-<text class="udt" x="46" y="890">ms-energy-device · settlement</text>
+<text class="udt" x="46" y="890">ms-energy-* (E2) · ms-pairing (E3)</text>
 <rect class="ubx" x="269" y="834" width="201" height="76" rx="5"/>
 <g fill="#fff" stroke="#dde4ea" stroke-width="1">
 <rect x="443" y="843" width="19" height="14" rx="1"/>
@@ -459,7 +459,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 <text class="ual" x="18" y="952">── ▸ dependencia «use», etiquetada con la interfaz que consume · borde punteado: componente que Voltera no opera · verde: ruta determinista · ámbar: la única escritura en la cadena, y la firma una persona</text>
 </svg>
 </div>
-<p class="cap">Las tres piezas que sostienen el tema asignado se leen de arriba abajo: un <code>MCP Client</code> por servidor, tres servidores con herramientas declaradas, y ninguna de ellas firma. La escritura en la cadena entra por un solo borde: la firma de la persona.</p>
+<p class="cap">Las tres piezas que sostienen el tema asignado se leen de arriba abajo: un <code>MCP Client</code> por servidor, tres servidores con herramientas declaradas, y ninguna de ellas firma. La recomendación aceptada sale de <strong>Recomendación vigente</strong> y entra como <code>Oferta</code> al mercado de la Entrega 3; el emparejamiento lo hace <code>ms-pairing</code>, no el agente. La escritura en la cadena entra por un solo borde: la firma de la persona.</p>
 <h3>La misma arquitectura por capas</h3>
 <p class="lede">El azul son los servidores MCP, donde se juega el tema asignado. El verde es la pieza determinista que decide. El ámbar es donde interviene una persona.</p>
 <div class="diag">
@@ -614,9 +614,25 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
   <p><strong>Ningún servicio nuevo de negocio.</strong> La IA agregó dos capas sobre lo que ya existía: una que decide con reglas y otra que explica. El mercado, los certificados, el medidor y la regulación ya estaban, y se exponen como herramientas sin reescribirse.</p>
 </div>
 
-<h3>Dónde está el emparejamiento</h3>
-<p><strong>No hay motor de emparejamiento.</strong> El mercado es un tablero de ofertas publicadas: <code>buy(certificateId)</code> compra una oferta concreta al precio exacto. No existe libro de órdenes ni cruce automático.</p>
-<p>Por eso el agente no es decorativo: alguien tiene que mirar las ofertas, comparar precio por kWh, verificar procedencia y decidir. Lo determinista es <code>buy()</code>, que revierte si el precio no coincide.</p>
+<h3>Dónde encaja el agente en el mercado que ya existe</h3>
+<p>El emparejamiento ya estaba resuelto. <code>ms-pairing</code> es, en palabras de la Entrega 3, <strong>el core del negocio</strong>: cruza órdenes con las reglas de validación de Voltera y emite <code>EmparejamientoRealizado</code>. <code>ms-order-admin</code> administra la intención de compra y venta, y <code>ms-market-participant</code> decide quién puede participar. <strong>El agente no empareja.</strong></p>
+<p>Lo que faltaba es anterior al emparejamiento: decidir <strong>si conviene ofertar y a qué precio</strong>. Ese juicio no lo hacía nadie y es lo que aporta esta entrega. La política determinista evalúa la oportunidad, el prosumidor acepta, y desde ahí corre el flujo que ya construyeron:</p>
+<p class="flow"><code>Oferta</code> en <code>ms-order-admin</code> → <code>ms-pairing</code> empareja → <code>ms-transaction</code> confirma → <code>ms-settlement</code> liquida → <code>ms-adapter-blockchain</code> escribe en la cadena</p>
+<p>Por eso ninguna de las nueve herramientas MCP escribe, ni en la cadena ni en el dominio. El agente produce una recomendación; lo que sigue son los microservicios de las Entregas 3 y 4, sin tocarlos.</p>
+<div class="key">
+  <div class="t">Lo que hace el PoC y lo que hace el objetivo</div>
+  <p>En el objetivo la escritura pasa por <code>ms-adapter-blockchain</code> y el cruce por <code>ms-pairing</code>. En el PoC la dApp firma directo contra <code>CertificateMarket</code> con <code>buy(id)</code>, porque los microservicios de mercado no están desplegados. La frontera de confianza no cambia: en los dos casos firma la persona, y en ninguno firma un servidor MCP.</p>
+</div>
+<h3>Lenguaje ubicuo de Negociación P2P</h3>
+<p>Los términos son los de la Entrega 1. El código conserva sus nombres; la arquitectura se lee con los del dominio.</p>
+<div class="tw"><table>
+<thead><tr><th>Término del contexto</th><th>Cómo aparece en el PoC</th></tr></thead>
+<tbody>
+<tr><td>Oferta · Excedente ofrecido</td><td>el certificado publicado en <code>CertificateMarket</code>, preparado por <code>preparar_publicacion</code></td></tr>
+<tr><td>Precio de oferta</td><td>el precio en VKWH que fija el prosumidor al aceptar</td></tr>
+<tr><td>Participante</td><td>la wallet del token SIWE, única aceptada</td></tr>
+<tr><td>Emparejamiento</td><td><code>ms-pairing</code> en el objetivo; <code>buy(id)</code> en el PoC</td></tr>
+</tbody></table></div>
 </section>
 
 <section id="decision">
@@ -892,11 +908,11 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 <tr><td>Conocimiento regulatorio</td><td>Nuevo</td><td>Modificabilidad ante cambio regulatorio</td><td>5</td></tr>
 <tr><td>Notificación de oportunidad</td><td>Nuevo</td><td>Latencia: el valor caduca</td><td>5 y 3</td></tr>
 <tr><td>Proyección de ofertas activas</td><td>Nuevo (objetivo)</td><td>Escalabilidad</td><td>3 y 4</td></tr>
-<tr><td>Publicación de oferta</td><td>Modificado: acepta propuestas del agente con límites</td><td>Seguridad</td><td>4</td></tr>
+<tr><td>Oferta en el mercado P2P</td><td>Modificado: acepta propuestas del agente con límites</td><td>Seguridad</td><td>4</td></tr>
 <tr><td>Portafolio del prosumidor</td><td>Modificado: muestra la recomendación vigente</td><td>Experiencia / latencia</td><td>2</td></tr>
 <tr><td>Medición y pronóstico</td><td>Modificados: se exponen como herramientas</td><td>Facilidad de integración</td><td>2 y 3</td></tr>
 <tr><td>Soporte de primer nivel sobre facturas</td><td><strong>Retirado</strong></td><td>Eficiencia operativa</td><td>5</td></tr>
-<tr><td>Publicación manual como camino principal</td><td><strong>Retirado</strong>, queda como respaldo</td><td>Latencia</td><td>4</td></tr>
+<tr><td>Oferta manual como camino principal</td><td><strong>Retirado</strong>, queda como respaldo</td><td>Latencia</td><td>4</td></tr>
 <tr><td>Alertas de precio genéricas</td><td><strong>Retirado</strong></td><td>Experiencia: ruido sin acción</td><td>3</td></tr>
 </tbody></table></div>
 </section>
@@ -983,7 +999,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 <thead><tr><th>Límite</th><th>Evolución</th></tr></thead>
 <tbody>
 <tr><td>Se vende el certificado completo; no hay venta parcial</td><td>Dividir certificados. Exige cambiar el contrato</td></tr>
-<tr><td>No hay emparejamiento automático</td><td>Motor de emparejamiento o subasta por intervalo</td></tr>
+<tr><td>El PoC no está conectado a <code>ms-pairing</code>: la dApp compra una oferta concreta con <code>buy(id)</code></td><td>Publicar la <code>Oferta</code> en <code>ms-order-admin</code> y dejar que <code>ms-pairing</code> cruce, como en la Entrega 3</td></tr>
 <tr><td><code>getActiveListings()</code> no escala a las metas del caso</td><td>Proyección alimentada por los eventos <code>Listed</code>, <code>Sold</code> y <code>Cancelled</code></td></tr>
 <tr><td><code>precio_por_franja</code> es simulado</td><td>Integrar el operador del mercado mayorista</td></tr>
 <tr><td>El token representa energía almacenada; la entrega física no se concilia</td><td>Pago en depósito hasta que el oráculo confirme la inyección</td></tr>
@@ -1076,7 +1092,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 <rect class="dbx" x="268" y="374" width="206" height="64" rx="4"/>
 <text class="dst" x="280" y="391">«artifact»</text>
 <text class="dnm" x="280" y="408">Microservicios Voltera</text>
-<text class="ddt" x="280" y="424">ya existen, Entrega 2</text>
+<text class="ddt" x="280" y="424">ms-energy-* (E2) · ms-pairing (E3)</text>
 <rect class="dbx" x="490" y="374" width="206" height="64" rx="4"/>
 <text class="dst" x="502" y="391">«artifact»</text>
 <text class="dnm" x="502" y="408">API del medidor</text>
