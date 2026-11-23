@@ -302,7 +302,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 <tr><td>Qué microservicios usa como herramientas</td><td><code>mcp-mercado</code> envuelve el mercado y los certificados en Amoy (Módulo 4) · <code>mcp-energia</code>, el medidor y la batería (Módulos 2 y 3) · <code>mcp-conocimiento</code>, el corpus regulatorio</td></tr>
 <tr><td>Qué decide la máquina</td><td>La política determinista decide vender, comprar o esperar, con umbrales en configuración. <strong>El LLM no decide:</strong> explica el porqué, responde sobre las reglas y maneja el ajuste</td></tr>
 <tr><td>Qué decide la persona</td><td>Firma o no firma en MetaMask. <strong>Es el único momento en que algo cambia en la cadena</strong></td></tr>
-<tr><td>Degradación elegante</td><td>Sin datos suficientes no hay recomendación, y se dice. El push igual sale con la regla fija</td></tr>
+<tr><td>Degradación elegante</td><td>Sin datos suficientes no hay recomendación, y se dice. El push igual sale con la regla fija. <strong>Cubre el dato ausente y también el obsoleto:</strong> una lectura vieja de una batería que ya falló no debe producir una recomendación de venta</td></tr>
 </tbody></table></div>
 <div class="key">
   <div class="t">Por qué no es una app de IA aparte</div>
@@ -323,7 +323,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 <tbody>
 <tr><td>Vender<br><span style="color:var(--muted);font-weight:400">publicar un certificado</span></td>
 <td>Tiene un certificado <code>Verified</code> sin publicar <strong>y</strong> el precio de la franja actual supera el umbral frente a las próximas franjas</td>
-<td>La batería está bajo la reserva mínima, o el certificado no es suyo o no está verificado</td></tr>
+<td>La batería está bajo la reserva mínima, <strong>no reporta estado <code>ok</code> o su lectura está vencida</strong>, o el certificado no es suyo o no está verificado</td></tr>
 <tr><td>Comprar<br><span style="color:var(--muted);font-weight:400">una oferta</span></td>
 <td>Hay déficit proyectado en las próximas horas <strong>y</strong> existe una oferta con precio por kWh bajo la tarifa de la red</td>
 <td>El certificado no está <code>Verified</code>, el vendedor es él mismo, o no le alcanza el POL</td></tr>
@@ -396,7 +396,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
     <h5>mcp-energia</h5>
     <div class="d">Fachada del medidor y la batería</div>
     <ul>
-      <li><code>estado_bateria</code></li>
+      <li><code>estado_bateria</code> → incluye <code>estado</code> (<code>ok</code> · <code>degradada</code> · <code>falla</code>) y <code>medidoHaceSeg</code></li>
       <li><code>generacion_reciente</code></li>
       <li><code>precio_por_franja</code></li>
     </ul>
@@ -591,6 +591,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 <tr><td><code>precio_por_franja</code> es simulado</td><td>Integrar el operador del mercado mayorista</td></tr>
 <tr><td>El token representa energía almacenada; la entrega física no se concilia</td><td>Pago en depósito hasta que el oráculo confirme la inyección</td></tr>
 <tr><td>El pronóstico es una regla fija, no un modelo</td><td>Capa predictiva real sobre generación y demanda</td></tr>
+<tr><td>La salud de la batería y la frescura del dato están diseñadas pero <strong>aún no implementadas</strong> en <code>mcp-energia</code></td><td>Añadir <code>estado</code> y <code>medidoHaceSeg</code> a la herramienta y las dos guardas a la política</td></tr>
 </tbody></table></div>
 </section>
 
@@ -676,6 +677,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 <h4>Algoritmo</h4>
 <ol>
 <li>Leer <code>precio_por_franja</code>, <code>estado_bateria</code>, <code>generacion_reciente</code> y <code>consultar_saldo</code>.</li>
+<li><strong>Salud y frescura:</strong> si la batería no reporta <code>estado: "ok"</code>, o si <code>medidoHaceSeg</code> supera el umbral, <strong>esperar</strong> con el motivo explícito, sin evaluar nada más.</li>
 <li><strong>Vender</strong> si hay certificado <code>Verified</code> sin publicar, el precio actual sobre el promedio alcanza <code>umbralVenta</code> y el SOC supera la reserva mínima. Candidato: el más antiguo.</li>
 <li><strong>Comprar</strong> si hay déficit proyectado y existe oferta bajo <code>umbralCompra</code>. Candidato: mejor precio por kWh entre las verificadas.</li>
 <li>Si ambas se cumplen, gana la de mayor diferencia porcentual contra su umbral.</li>
