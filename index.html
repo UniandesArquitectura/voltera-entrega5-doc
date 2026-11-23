@@ -554,6 +554,8 @@ footer{border-top:1px solid var(--line);padding:26px 0 0;margin-top:42px;font-si
 <div class="tw"><table>
 <thead><tr><th>Decisión</th><th>Alternativa descartada</th><th>Trade-off</th></tr></thead>
 <tbody>
+<tr><td>Adoptar MCP como protocolo estándar para conectar los agentes con las capacidades de Voltera</td><td>Integraciones propietarias, una por cada modelo y cada API REST</td><td>Gana interoperabilidad, reutilización y menor acoplamiento entre la IA y los sistemas; paga una capa tecnológica más, con su aprendizaje y su mantenimiento</td></tr>
+<tr><td>Las reglas del dominio se quedan en los microservicios y en el contrato; MCP es solo el adaptador de herramientas</td><td>Que el modelo acceda directo a las bases de datos, o trasladar las reglas a los servidores MCP</td><td>Gana separación de responsabilidades, integridad de las reglas y reutilización de lo que ya existe; paga latencia por el salto entre MCP y los microservicios. <strong>La política de recomendación es la excepción: vive en la orquestación, en código y aparte</strong></td></tr>
 <tr><td>Un servidor MCP por dominio</td><td>Uno solo con todas las herramientas</td><td>Gana aislamiento de permisos y despliegue independiente; paga más endpoints que operar</td></tr>
 <tr><td><strong>Ninguna herramienta firma</strong></td><td>Una herramienta <code>comprar</code> que ejecute</td><td>Gana que un error o manipulación del modelo no mueve dinero; paga un paso más</td></tr>
 <tr><td><strong>La decisión vive en código, no en el prompt</strong></td><td>Que el LLM decida si conviene vender</td><td>Gana resultado auditable y repetible; paga flexibilidad</td></tr>
